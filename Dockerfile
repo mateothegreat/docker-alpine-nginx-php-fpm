@@ -7,6 +7,7 @@ RUN adduser -D -u 1000 -g 1000 -s /bin/sh www-data && \
     chown -R www-data:www-data /www
 
 RUN apk --update add \
+    curl \
     nginx \
     php7 \
     php7-apcu \
@@ -35,6 +36,8 @@ RUN apk --update add \
     php7-zip \
     php7-zlib \
     php7-zmq
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 
